@@ -1,54 +1,45 @@
 package com.example.guilleapp.main
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.guilleapp.MapsActivity
 import com.example.guilleapp.R
 import com.example.guilleapp.second.SecondActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.app_bar_main.*
-import androidx.navigation.Navigation.findNavController as findNavController1
 
 class MainActivity : AppCompatActivity(), CountryListFragment.Response,
     NavigationView.OnNavigationItemSelectedListener {
 
-    private lateinit var mDrawerLayout: DrawerLayout
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-            setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main)
+        setSupportActionBar(toolbar)
+        initMenu()
+        initListeners()
+    }
 
-            setSupportActionBar(toolbar)
+    private fun initMenu() {
+        val toggle = ActionBarDrawerToggle(
+            this, drawer_layout, toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
 
-            //val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
-            if (savedInstanceState == null) {
-                val host = NavHostFragment.create(R.navigation.nav_graph)
-                supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, host)
-                    .setPrimaryNavigationFragment(host).commit()
-            }
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
+    }
 
-            val toggle = ActionBarDrawerToggle(
-                this, drawer_layout, toolbar,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close
-            )
-            drawer_layout.addDrawerListener(toggle)
-            toggle.syncState()
-
-            nav_view.setNavigationItemSelectedListener(this)
-
-
+    private fun initListeners() {
+        nav_view.setNavigationItemSelectedListener(this)
     }
 
     override fun onBackPressed() {
