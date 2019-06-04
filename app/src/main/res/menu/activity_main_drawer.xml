@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+                android:id="@+id/nav_countries"
+                android:icon="@drawable/ic_menu_flag"
+                android:title="@string/countries"/>
+        <item
+                android:id="@+id/nav_countryStar"
+                android:icon="@drawable/ic_menu_star"
+                android:title="@string/best_country"/>
+    </group>
+
+    <item android:title="@string/others">
+        <menu>
+            <item
+                    android:id="@+id/nav_map"
+                    android:icon="@drawable/ic_menu_map"
+                    android:title="Map"/>
+            <item
+                    android:id="@+id/nav_about"
+                    android:icon="@drawable/ic_menu_info"
+                    android:title="About"/>
+        </menu>
+    </item>
+
+</menu>

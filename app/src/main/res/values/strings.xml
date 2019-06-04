@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">GuilleApp</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="PobDefault">44000000</string>
+    <string name="NameDefault">España</string>
+    <string name="flag">Flag:</string>
+    <string name="poblation">Población:</string>
+    <string name="pib">PIB:</string>
+    <string name="nav_header_desc">Aplicación con informacion de los Paises más importantes del mundo</string>
+    <string name="nav_header_subtitle">Aplicacion de Paises</string>
+    <string name="nav_header_title">GuilleApp</string>
+    <string name="thanks">Gracias por Usar GuilleApp</string>
+    <string name="no_image">No Image</string>
+    <string name="first_fragment">First Fragment</string>
+    <string name="second_fragment">Second Fragment</string>
+    <string name="created_by">Aplicación creada por Carlos Iniesta</string>
+    <string name="game_over">GAME OVER!</string>
+    <string name="third_fragment">Third Fragment</string>
+    <string name="click_me">Click Me!</string>
+    <string name="title_activity_maps">Maps</string>
+    <string name="countries">Countries</string>
+    <string name="best_country">Best Country</string>
+    <string name="others">Others</string>
+</resources>
