@@ -1,4 +1,4 @@
-package com.example.guilleapp.main
+package com.example.guilleapp.main.countrylist
 
 import android.content.Context
 import android.os.Bundle
@@ -8,9 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.guilleapp.R
+import com.example.guilleapp.main.Country
 import kotlinx.android.synthetic.main.fragment_list.*
 
-class CountryListFragment : Fragment() {
+class CountryListFragment : Fragment(), CountryListFragmentView {
+
+    private val presenter: PresenterCountryList = PresenterCountryListImpl(view = this)
 
     private var listenerResponse: Response? = null
 
@@ -27,61 +30,24 @@ class CountryListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        if (savedInstanceState == null) {
+            configAdapter()
+
+            presenter.getCountries()
+        }
+    }
+
+    private fun configAdapter() {
         my_recycler_view?.layoutManager = LinearLayoutManager(activity)
 
-        val countries = ArrayList<Country>()
-        addCountries(countries)
+        val adapter = AdapterCountry(ArrayList())
 
-        val adapter = AdapterCountry(countries)
         adapter.responseListener = object : AdapterCountry.Response {
             override fun itemPressed(item: Country) {
                 listenerResponse?.itemPressed(item)
             }
         }
         my_recycler_view?.adapter = adapter
-    }
-
-    private fun addCountries(countries: ArrayList<Country>) {
-        countries.add(
-            Country(
-                "Italia",
-                60600000,
-                R.drawable.italy,
-                1395
-            )
-        )
-        countries.add(
-            Country(
-                "Francia",
-                67000000,
-                R.drawable.francia,
-                2583
-            )
-        )
-        countries.add(
-            Country(
-                "Alemania",
-                82800000,
-                R.drawable.alemania,
-                3677
-            )
-        )
-        countries.add(
-            Country(
-                "España",
-                46700000,
-                R.drawable.espana,
-                1311
-            )
-        )
-        countries.add(
-            Country(
-                "El Escorial",
-                15842,
-                R.drawable.escorial,
-                9999
-            )
-        )
     }
 
     override fun onAttach(context: Context?) {
@@ -95,6 +61,14 @@ class CountryListFragment : Fragment() {
 
         listenerResponse = null
     }
+
+    // ---- CountryListFragmentView ----
+
+    override fun showCountries(countries: List<Country>) {
+        (my_recycler_view?.adapter as? AdapterCountry?)?.update(countries = countries)
+    }
+
+    // ---- END CountryListFragmentView ----
 
     // ---- Interface ----
 
