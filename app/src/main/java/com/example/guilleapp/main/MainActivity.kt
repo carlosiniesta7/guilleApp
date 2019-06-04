@@ -12,6 +12,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.guilleapp.MapsActivity
 import com.example.guilleapp.R
+import com.example.guilleapp.main.countrylist.CountryListFragment
+import com.example.guilleapp.main.countrylist.CountryListFragmentDirections
 import com.example.guilleapp.second.SecondActivity
 import kotlinx.android.synthetic.main.activity_main.*
 

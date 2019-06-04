@@ -9,7 +9,7 @@
     <fragment
             android:id="@+id/listFragment"
             android:label="fragment_list"
-            android:name="com.example.guilleapp.main.CountryListFragment"
+            android:name="com.example.guilleapp.main.countrylist.CountryListFragment"
             tools:layout="@layout/fragment_list" >
         <action
                 android:id="@+id/action_showDetail"

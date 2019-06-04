@@ -21,10 +21,6 @@ class FirstVPFragment : Fragment() {
         imgMain?.setImageResource(R.mipmap.ic_launcher)
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
     companion object {
         fun newInstance(): FirstVPFragment {
             return FirstVPFragment()

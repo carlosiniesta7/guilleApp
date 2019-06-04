@@ -1,4 +1,4 @@
-package com.example.guilleapp.main
+package com.example.guilleapp.main.countrylist
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -8,8 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.guilleapp.R
+import com.example.guilleapp.main.Country
 
-class AdapterCountry(var list: ArrayList<Country>) : RecyclerView.Adapter<AdapterCountry.ViewHolder>() {
+class AdapterCountry(private var list: MutableList<Country>) : RecyclerView.Adapter<AdapterCountry.ViewHolder>() {
 
     interface Response {
         fun itemPressed(item: Country)
@@ -28,6 +29,12 @@ class AdapterCountry(var list: ArrayList<Country>) : RecyclerView.Adapter<Adapte
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItems(list[position])
+    }
+
+    fun update(countries: List<Country>) {
+        list.clear()
+        list.addAll(countries)
+        notifyDataSetChanged()
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
