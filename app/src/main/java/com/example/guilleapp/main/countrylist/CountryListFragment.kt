@@ -29,12 +29,8 @@ class CountryListFragment : Fragment(), CountryListFragmentView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        if (savedInstanceState == null) {
-            configAdapter()
-
-            presenter.getCountries()
-        }
+        configAdapter()
+        presenter.getCountries()
     }
 
     private fun configAdapter() {

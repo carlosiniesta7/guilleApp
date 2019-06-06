@@ -8,10 +8,12 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.guilleapp.MapsActivity
 import com.example.guilleapp.R
+import com.example.guilleapp.main.countrydetail.CountryDetailViewModelIn
 import com.example.guilleapp.main.countrylist.CountryListFragment
 import com.example.guilleapp.main.countrylist.CountryListFragmentDirections
 import com.example.guilleapp.second.SecondActivity
@@ -58,13 +60,10 @@ class MainActivity : AppCompatActivity(), CountryListFragment.Response,
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_countries -> {
-                //Reemplazar a Countries
-                val host = NavHostFragment.create(R.navigation.nav_graph)
-                supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, host)
-                    .setPrimaryNavigationFragment(host).commit()
+                findNavController(R.id.nav_host_fragment).navigateUp()
             }
             R.id.nav_countryStar -> {
-                Toast.makeText(this, "Deshabilitado", Toast.LENGTH_SHORT).show()
+                findNavController(R.id.nav_host_fragment).navigateUp()
                 /*val action = CountryListFragmentDirections.actionShowDetail(R.drawable.escorial)
                 action.countryName = "EL ESCORIAL"
                 action.countryPoblation = "15842"
@@ -77,13 +76,9 @@ class MainActivity : AppCompatActivity(), CountryListFragment.Response,
                 startActivity(intentMap)
             }
             R.id.nav_about -> {
-                //Toast.makeText(this, "Cambiar a Activity con ViewPager", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, SecondActivity::class.java)
-
                 /*// To pass any data to next activity
                 intent.putExtra("keyIdentifier", value)*/
-
-                // start your next activity
                 startActivity(intent)
             }
         }
@@ -98,12 +93,12 @@ class MainActivity : AppCompatActivity(), CountryListFragment.Response,
     // ---- CountryListFragment.Response ----
 
     override fun itemPressed(item: Country) {
-        val action = CountryListFragmentDirections.actionShowDetail(item.flag!!)
-        action.countryName = item.name
-        action.countryPoblation = item.poblation.toString()
-        action.countryPIB = item.PIB.toString()
+        val modelIn = CountryDetailViewModelIn(item)
 
-        findNavController(R.id.nav_host_fragment).navigate(action)
+        val bundle = Bundle()
+        bundle.putParcelable("modelIn", modelIn)
+
+        findNavController(R.id.nav_host_fragment).navigate(R.id.action_showDetail, bundle)
     }
 
     // ---- END CountryListFragment.Response ----

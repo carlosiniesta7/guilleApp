@@ -22,4 +22,6 @@
     <string name="countries">Countries</string>
     <string name="best_country">Best Country</string>
     <string name="others">Others</string>
+    <string name="pibHab">PIBPerHab:</string>
+    <string name="flag_of_the_country">Flag of the Country</string>
 </resources>
