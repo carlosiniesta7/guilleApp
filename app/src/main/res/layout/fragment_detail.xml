@@ -1,30 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-<android.support.constraint.ConstraintLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp">
 
 
-    <ImageView
+        <ImageView
             android:id="@+id/detailFlag"
             android:layout_width="wrap_content"
             android:layout_height="108dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:contentDescription="@string/flag_of_the_country"
-            tools:src="@drawable/ic_more_black_24dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
-            android:layout_marginTop="4dp" app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_more_black_24dp" />
 
-    <TextView
+        <TextView
             android:id="@+id/txtDetailName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,87 +38,108 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detailFlag"
-            tools:text="Mi Pais" tools:ignore="MissingConstraints"/>
-    <TextView
+            tools:ignore="MissingConstraints"
+            tools:text="Mi Pais" />
+
+        <TextView
             android:id="@+id/txtPob"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginRight="12dp"
+            android:text="@string/poblation"
             android:textColor="#de000000"
             android:textSize="20sp"
             android:textStyle="bold|italic"
-            android:text="@string/poblation"
+            app:layout_constraintEnd_toStartOf="@+id/txtDetailPob"
             app:layout_constraintTop_toBottomOf="@+id/txtDetailName"
-            tools:text="Poblation"
-            app:layout_constraintEnd_toStartOf="@+id/txtDetailPob" android:layout_marginEnd="12dp"
-            android:layout_marginRight="12dp"/>
+            tools:text="Poblation" />
 
-    <TextView
+        <TextView
             android:id="@+id/txtDetailPob"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="48dp"
             android:textColor="#de000000"
             android:textSize="20sp"
-            tools:text="12500000"
-            android:layout_marginTop="48dp"
-            app:layout_constraintTop_toBottomOf="@+id/txtDetailName" app:layout_constraintStart_toEndOf="@+id/txtPob"
-            android:layout_marginStart="20dp" android:layout_marginLeft="20dp"
-    />
-    <TextView
+            app:layout_constraintStart_toEndOf="@+id/txtPob"
+            app:layout_constraintTop_toBottomOf="@+id/txtDetailName"
+            tools:text="12500000" />
+
+        <TextView
             android:id="@+id/txtPib"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="@string/pib"
             android:textColor="#de000000"
             android:textSize="20sp"
             android:textStyle="bold|italic"
-            android:text="@string/pib"
+            app:layout_constraintEnd_toStartOf="@+id/txtPob"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="@string/pib" android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/txtPob" android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp" app:layout_constraintHorizontal_bias="0.0"
-            android:layout_marginTop="36dp" app:layout_constraintTop_toBottomOf="@+id/txtPob"/>
+            app:layout_constraintTop_toBottomOf="@+id/txtPob"
+            tools:text="@string/pib" />
 
-    <TextView
+        <TextView
             android:id="@+id/txtDetailPib"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="220dp"
+            android:layout_marginRight="220dp"
             android:textColor="#de000000"
             android:textSize="20sp"
-            tools:text="7777 Billones "
-            android:layout_marginEnd="220dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="220dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/txtPib"
             app:layout_constraintTop_toBottomOf="@+id/txtDetailPob"
-            android:layout_marginTop="36dp" app:layout_constraintStart_toEndOf="@+id/txtPib"
-            android:layout_marginStart="16dp" android:layout_marginLeft="16dp"
-            app:layout_constraintHorizontal_bias="0.0"/>
-    <TextView
+            tools:text="7777 Billones " />
+
+        <TextView
             android:id="@+id/txtPibHab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="@string/pibHab"
             android:textColor="#de000000"
             android:textSize="20sp"
             android:textStyle="bold|italic"
-            android:text="@string/pibHab"
+            app:layout_constraintEnd_toStartOf="@+id/txtPib"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="@string/pibHab" android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/txtPib" android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp" app:layout_constraintHorizontal_bias="0.0"
-            android:layout_marginTop="36dp" app:layout_constraintTop_toBottomOf="@+id/txtPib"/>
+            app:layout_constraintTop_toBottomOf="@+id/txtPib"
+            tools:text="@string/pibHab" />
 
-    <TextView
+        <TextView
             android:id="@+id/txtDetailPibHab"
-            android:layout_width="23dp"
-            android:layout_height="26dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="180dp"
+            android:layout_marginRight="180dp"
             android:textColor="#de000000"
             android:textSize="20sp"
-            tools:text="77"
-            android:layout_marginEnd="180dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="180dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtPibHab"
             app:layout_constraintTop_toBottomOf="@+id/txtDetailPib"
-            android:layout_marginTop="36dp"
-            app:layout_constraintStart_toEndOf="@+id/txtPibHab" android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"/>
+            tools:text="77" />
 
 
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
 </ScrollView>
