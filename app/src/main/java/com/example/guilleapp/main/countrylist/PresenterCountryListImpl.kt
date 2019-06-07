@@ -4,11 +4,11 @@ import com.example.guilleapp.R
 import com.example.guilleapp.main.Country
 
 class PresenterCountryListImpl(private val view: CountryListFragmentView) : PresenterCountryList {
-    override fun getCountries() {
+    override fun getCountries()  {
         view.showCountries(countries = addCountries())
     }
 
-    private fun addCountries() : List<Country> =
+    private fun addCountries() : ArrayList<Country> =
         ArrayList<Country>().also { countries ->
             countries.add(
                 Country(

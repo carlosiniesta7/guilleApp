@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.guilleapp.R
 import com.example.guilleapp.main.Country
+import com.example.guilleapp.main.countrydetail.CountryDetailFragment
 import kotlinx.android.synthetic.main.fragment_list.*
 
 class CountryListFragment : Fragment(), CountryListFragmentView {
@@ -16,6 +17,8 @@ class CountryListFragment : Fragment(), CountryListFragmentView {
     private val presenter: PresenterCountryList = PresenterCountryListImpl(view = this)
 
     private var listenerResponse: Response? = null
+
+    private var countries: ArrayList<Country>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,11 +33,19 @@ class CountryListFragment : Fragment(), CountryListFragmentView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         configAdapter()
-        presenter.getCountries()
+        if (savedInstanceState == null) {
+            presenter.getCountries()
+        }
+        else {
+            countries = savedInstanceState.getParcelableArrayList<Country>(COUNTRIES)?.also {
+                showCountries(it)
+            }
+        }
     }
 
     private fun configAdapter() {
-        my_recycler_view?.layoutManager = LinearLayoutManager(activity)
+
+        my_recycler_view?.layoutManager = activity?.let { LinearLayoutManager(it) }
 
         val adapter = AdapterCountry(ArrayList())
 
@@ -44,6 +55,16 @@ class CountryListFragment : Fragment(), CountryListFragmentView {
             }
         }
         my_recycler_view?.adapter = adapter
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelableArrayList(COUNTRIES, countries)
+
+        super.onSaveInstanceState(outState)
+    }
+
+    companion object {
+        private const val COUNTRIES = "COUNTRIES"
     }
 
     override fun onAttach(context: Context?) {
@@ -60,7 +81,8 @@ class CountryListFragment : Fragment(), CountryListFragmentView {
 
     // ---- CountryListFragmentView ----
 
-    override fun showCountries(countries: List<Country>) {
+    override fun showCountries(countries: ArrayList<Country>) {
+        this.countries = countries
         (my_recycler_view?.adapter as? AdapterCountry?)?.update(countries = countries)
     }
 
@@ -73,11 +95,5 @@ class CountryListFragment : Fragment(), CountryListFragmentView {
     }
 
     // ---- END Interface ----
-
-    companion object {
-        fun newInstance(): CountryListFragment {
-            return CountryListFragment()
-        }
-    }
 
 }

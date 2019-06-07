@@ -4,16 +4,16 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class Country(
-    var name: String,
+    var name: String?,
     var poblation: Int,
-    var flag: Int?,
+    var flag: Int,
     var PIB: Int,
     var PIBPerHab: Float = -1F
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readValue(String::class.java.classLoader) as String,
+        parcel.readString(),
         parcel.readInt(),
-        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readInt(),
         parcel.readInt(),
         parcel.readFloat()
     )
@@ -21,7 +21,7 @@ data class Country(
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
         parcel.writeInt(poblation)
-        parcel.writeValue(flag)
+        parcel.writeInt(flag)
         parcel.writeInt(PIB)
         parcel.writeFloat(PIBPerHab)
     }

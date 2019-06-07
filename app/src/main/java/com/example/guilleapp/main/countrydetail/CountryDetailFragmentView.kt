@@ -4,5 +4,4 @@ import com.example.guilleapp.main.Country
 
 interface CountryDetailFragmentView {
     fun showCountry(country: Country)
-
 }

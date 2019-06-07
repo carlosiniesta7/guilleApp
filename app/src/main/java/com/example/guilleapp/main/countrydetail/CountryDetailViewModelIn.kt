@@ -4,9 +4,9 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.example.guilleapp.main.Country
 
-data class CountryDetailViewModelIn(val country: Country) : Parcelable {
+data class CountryDetailViewModelIn(val country: Country?) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readValue(Country::class.java.classLoader) as Country
+        parcel.readValue(Country::class.java.classLoader) as? Country
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

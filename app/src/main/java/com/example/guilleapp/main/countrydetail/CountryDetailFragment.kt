@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.fragment_detail.*
 
 class CountryDetailFragment : Fragment(), CountryDetailFragmentView {
     private val presenter: PresenterCountryDetail = PresenterCountryDetailImpl(this)
+    private var country: Country? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,11 +26,18 @@ class CountryDetailFragment : Fragment(), CountryDetailFragmentView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-            arguments?.let {
-                (CountryDetailFragmentArgs.fromBundle(it).modelIn as? CountryDetailViewModelIn?)?.let { model ->
-                    presenter.getPIBPerHab(model.country)
-                }
+        if (savedInstanceState == null) {
+            country = arguments?.let {
+                (CountryDetailFragmentArgs.fromBundle(it).modelIn as? CountryDetailViewModelIn?)?.country
             }
+            country?.let { country ->
+                presenter.getPIBPerHab(country = country)
+            }
+        } else {
+            country = (savedInstanceState.getParcelable(COUNTRY) as? Country?)?.also {
+                showCountry(it)
+            }
+        }
     }
 
     override fun showCountry(country: Country) {
@@ -42,4 +50,13 @@ class CountryDetailFragment : Fragment(), CountryDetailFragmentView {
         txtDetailPibHab?.text = country.PIBPerHab.toString()
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelable(COUNTRY, country)
+
+        super.onSaveInstanceState(outState)
+    }
+
+    companion object {
+        private const val COUNTRY = "COUNTRY"
+    }
 }

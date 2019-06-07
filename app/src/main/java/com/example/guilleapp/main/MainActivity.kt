@@ -7,15 +7,11 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import android.widget.Toast
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import com.example.guilleapp.MapsActivity
 import com.example.guilleapp.R
 import com.example.guilleapp.main.countrydetail.CountryDetailViewModelIn
 import com.example.guilleapp.main.countrylist.CountryListFragment
-import com.example.guilleapp.main.countrylist.CountryListFragmentDirections
 import com.example.guilleapp.second.SecondActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
