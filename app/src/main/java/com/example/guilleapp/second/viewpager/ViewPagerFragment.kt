@@ -1,4 +1,4 @@
-package com.example.guilleapp.second
+package com.example.guilleapp.second.viewpager
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -20,7 +20,8 @@ class ViewPagerFragment : Fragment() {
         val lFragments = ArrayList<Fragment>()
         lFragments.add(FirstVPFragment.newInstance())
         lFragments.add(SecondVPFragment.newInstance())
-        val adapter = ViewPagerAdapter(lFragment = lFragments, fm = childFragmentManager)
+        val adapter =
+            ViewPagerAdapter(lFragment = lFragments, fm = childFragmentManager)
         viewPager?.adapter = adapter
     }
 

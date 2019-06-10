@@ -3,6 +3,7 @@ package com.example.guilleapp.main
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.app.ActivityCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -12,6 +13,7 @@ import com.example.guilleapp.MapsActivity
 import com.example.guilleapp.R
 import com.example.guilleapp.main.countrydetail.CountryDetailViewModelIn
 import com.example.guilleapp.main.countrylist.CountryListFragment
+import com.example.guilleapp.main.countrylist.CountryListFragmentDirections
 import com.example.guilleapp.second.SecondActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -25,6 +27,11 @@ class MainActivity : AppCompatActivity(), CountryListFragment.Response,
         setSupportActionBar(toolbar)
         initMenu()
         initListeners()
+
+        //Request Permissions for Maps
+        val permissions = arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION)
+        ActivityCompat.requestPermissions(this, permissions, 0)
+
     }
 
     private fun initMenu() {
@@ -59,12 +66,7 @@ class MainActivity : AppCompatActivity(), CountryListFragment.Response,
                 findNavController(R.id.nav_host_fragment).navigateUp()
             }
             R.id.nav_countryStar -> {
-                findNavController(R.id.nav_host_fragment).navigateUp()
-                /*val action = CountryListFragmentDirections.actionShowDetail(R.drawable.escorial)
-                action.countryName = "EL ESCORIAL"
-                action.countryPoblation = "15842"
-                action.countryPIB = "9999"
-                findNavController(R.id.nav_host_fragment).navigate(action)*/
+                goToBestCountry()
             }
             R.id.nav_map -> {
                 val intentMap = Intent(this, MapsActivity::class.java)
@@ -81,6 +83,13 @@ class MainActivity : AppCompatActivity(), CountryListFragment.Response,
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun goToBestCountry() {
+        findNavController(R.id.nav_host_fragment).navigateUp()
+        val fav = CountryDetailViewModelIn(Country("El Escorial", 15842, R.drawable.escorial, 9999))
+        val action = CountryListFragmentDirections.actionShowDetail(fav)
+        findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
     // ---- END NavigationView.OnNavigationItemSelectedListener ----

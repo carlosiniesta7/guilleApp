@@ -2,10 +2,13 @@ package com.example.guilleapp.main.countrylist
 
 import com.example.guilleapp.R
 import com.example.guilleapp.main.Country
+import java.lang.ref.WeakReference
 
-class PresenterCountryListImpl(private val view: CountryListFragmentView) : PresenterCountryList {
+class PresenterCountryListImpl(paramView: CountryListFragmentView) : PresenterCountryList {
+    private val view: WeakReference<CountryListFragmentView> = WeakReference(paramView)
+
     override fun getCountries()  {
-        view.showCountries(countries = addCountries())
+        view.get()?.showCountries(countries = addCountries())
     }
 
     private fun addCountries() : ArrayList<Country> =

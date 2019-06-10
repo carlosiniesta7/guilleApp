@@ -2,8 +2,10 @@ package com.example.guilleapp.second
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.view.ViewPager
 import com.example.guilleapp.R
+import com.example.guilleapp.second.viewpager.SecondVPFragment
+import com.example.guilleapp.second.viewpager.ThirdFragment
+import com.example.guilleapp.second.viewpager.ViewPagerFragment
 
 
 class SecondActivity : AppCompatActivity(), SecondVPFragment.ButtonClick {

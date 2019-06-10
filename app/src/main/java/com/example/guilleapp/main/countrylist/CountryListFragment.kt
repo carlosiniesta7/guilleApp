@@ -9,12 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.guilleapp.R
 import com.example.guilleapp.main.Country
-import com.example.guilleapp.main.countrydetail.CountryDetailFragment
 import kotlinx.android.synthetic.main.fragment_list.*
 
 class CountryListFragment : Fragment(), CountryListFragmentView {
 
-    private val presenter: PresenterCountryList = PresenterCountryListImpl(view = this)
+    private val presenter: PresenterCountryList = PresenterCountryListImpl(paramView = this)
 
     private var listenerResponse: Response? = null
 
@@ -57,16 +56,6 @@ class CountryListFragment : Fragment(), CountryListFragmentView {
         my_recycler_view?.adapter = adapter
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putParcelableArrayList(COUNTRIES, countries)
-
-        super.onSaveInstanceState(outState)
-    }
-
-    companion object {
-        private const val COUNTRIES = "COUNTRIES"
-    }
-
     override fun onAttach(context: Context?) {
         super.onAttach(context)
 
@@ -77,6 +66,16 @@ class CountryListFragment : Fragment(), CountryListFragmentView {
         super.onDetach()
 
         listenerResponse = null
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelableArrayList(COUNTRIES, countries)
+
+        super.onSaveInstanceState(outState)
+    }
+
+    companion object {
+        private const val COUNTRIES = "COUNTRIES"
     }
 
     // ---- CountryListFragmentView ----

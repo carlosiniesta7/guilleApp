@@ -1,4 +1,4 @@
-package com.example.guilleapp.second
+package com.example.guilleapp.second.viewpager
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
