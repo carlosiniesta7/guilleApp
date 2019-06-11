@@ -1,7 +1,10 @@
 package com.example.guilleapp.main.countrylist
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
+import android.os.Parcelable
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -12,18 +15,21 @@ import com.example.guilleapp.main.Country
 import kotlinx.android.synthetic.main.fragment_list.*
 import java.io.Serializable
 
-class CountryListFragment : Fragment(), CountryListFragmentView {
+@Suppress("UNCHECKED_CAST")
+class CountryListFragment : Fragment() {
 
-    private val presenter: PresenterCountryList = PresenterCountryListImpl(paramView = this)
+    private lateinit var viewModel: CountryListViewModel
 
     private var listenerResponse: Response? = null
 
-    private var countries: MutableList<Country>? = null
+    private var countries: List<Country>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel = ViewModelProviders.of(this, CountryListViewModelFactory()).get(CountryListViewModel::class.java)
+
         return inflater.inflate(
             R.layout.fragment_list,
             container, false
@@ -34,11 +40,14 @@ class CountryListFragment : Fragment(), CountryListFragmentView {
         super.onActivityCreated(savedInstanceState)
         configAdapter()
         if (savedInstanceState == null) {
-            presenter.getCountries()
+            viewModel.getCountriesLD().observe(this, Observer { countries ->
+                if (countries != null) {
+                    showCountries(countries)
+                }
+            })
         }
         else {
-            @Suppress("UNCHECKED_CAST")
-            countries = (savedInstanceState.getSerializable(COUNTRIES) as? MutableList<Country>?)?.also {
+            countries = (savedInstanceState.getSerializable(COUNTRIES) as? List<Country>)?.also {
                 showCountries(it)
             }
         }
@@ -80,21 +89,16 @@ class CountryListFragment : Fragment(), CountryListFragmentView {
         private const val COUNTRIES = "COUNTRIES"
     }
 
-    // ---- CountryListFragmentView ----
-
-    override fun showCountries(countries: MutableList<Country>) {
+    private fun showCountries(countries: List<Country>) {
         this.countries = countries
         (my_recycler_view?.adapter as? AdapterCountry?)?.update(countries = countries)
     }
-
-    // ---- END CountryListFragmentView ----
 
     // ---- Interface ----
 
     interface Response {
         fun itemPressed(item: Country)
     }
-
     // ---- END Interface ----
 
 }

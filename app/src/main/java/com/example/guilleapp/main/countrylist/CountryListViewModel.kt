@@ -1,18 +1,23 @@
 package com.example.guilleapp.main.countrylist
 
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.ViewModel
 import com.example.guilleapp.R
 import com.example.guilleapp.main.Country
-import java.lang.ref.WeakReference
 
-class PresenterCountryListImpl(paramView: CountryListFragmentView) : PresenterCountryList {
-    private val view: WeakReference<CountryListFragmentView> = WeakReference(paramView)
+class CountryListViewModel : ViewModel() {
 
-    override fun getCountries()  {
-        view.get()?.showCountries(countries = addCountries())
+    private var countriesLD: MutableLiveData<List<Country>> = MutableLiveData()
+
+    init {
+        countriesLD.value = addCountries()
     }
 
-    private fun addCountries() : ArrayList<Country> =
-        ArrayList<Country>().also { countries ->
+    fun getCountriesLD(): LiveData<List<Country>> = countriesLD
+
+    private fun addCountries(): List<Country> =
+            ArrayList<Country>().also { countries ->
             countries.add(
                 Country(
                     "Italia",
