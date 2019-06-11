@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.example.guilleapp.R
 import com.example.guilleapp.main.Country
 import kotlinx.android.synthetic.main.fragment_list.*
+import java.io.Serializable
 
 class CountryListFragment : Fragment(), CountryListFragmentView {
 
@@ -17,7 +18,7 @@ class CountryListFragment : Fragment(), CountryListFragmentView {
 
     private var listenerResponse: Response? = null
 
-    private var countries: ArrayList<Country>? = null
+    private var countries: MutableList<Country>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +37,8 @@ class CountryListFragment : Fragment(), CountryListFragmentView {
             presenter.getCountries()
         }
         else {
-            countries = savedInstanceState.getParcelableArrayList<Country>(COUNTRIES)?.also {
+            @Suppress("UNCHECKED_CAST")
+            countries = (savedInstanceState.getSerializable(COUNTRIES) as? MutableList<Country>?)?.also {
                 showCountries(it)
             }
         }
@@ -69,7 +71,7 @@ class CountryListFragment : Fragment(), CountryListFragmentView {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putParcelableArrayList(COUNTRIES, countries)
+        outState.putSerializable(COUNTRIES, countries as Serializable)
 
         super.onSaveInstanceState(outState)
     }
@@ -80,7 +82,7 @@ class CountryListFragment : Fragment(), CountryListFragmentView {
 
     // ---- CountryListFragmentView ----
 
-    override fun showCountries(countries: ArrayList<Country>) {
+    override fun showCountries(countries: MutableList<Country>) {
         this.countries = countries
         (my_recycler_view?.adapter as? AdapterCountry?)?.update(countries = countries)
     }

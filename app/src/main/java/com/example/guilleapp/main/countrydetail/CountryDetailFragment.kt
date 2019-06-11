@@ -1,23 +1,30 @@
 package com.example.guilleapp.main.countrydetail
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.guilleapp.R
 import com.example.guilleapp.main.Country
 import kotlinx.android.synthetic.main.fragment_detail.*
 
-class CountryDetailFragment : Fragment(), CountryDetailFragmentView {
-    private val presenter: PresenterCountryDetail = PresenterCountryDetailImpl(this)
-    private var country: Country? = null
+class CountryDetailFragment : Fragment() {
+
+    private val args: CountryDetailFragmentArgs by navArgs()
+
+    private lateinit var viewModel: CountryDetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel = ViewModelProviders.of(this, CountryDetailViewModelFactory(country = args.modelIn.country)).get(CountryDetailViewModel::class.java)
+
         return inflater.inflate(
             R.layout.fragment_detail,
             container, false
@@ -26,21 +33,15 @@ class CountryDetailFragment : Fragment(), CountryDetailFragmentView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if (savedInstanceState == null) {
-            country = arguments?.let {
-                (CountryDetailFragmentArgs.fromBundle(it).modelIn as? CountryDetailViewModelIn?)?.country
+
+        viewModel.getCountryLD().observe(this, Observer { country ->
+            if (country != null) {
+                showCountry(country)
             }
-            country?.let { country ->
-                presenter.getPIBPerHab(country = country)
-            }
-        } else {
-            country = (savedInstanceState.getParcelable(COUNTRY) as? Country?)?.also {
-                showCountry(it)
-            }
-        }
+        })
     }
 
-    override fun showCountry(country: Country) {
+    private fun showCountry(country: Country) {
         context?.let {
             Glide.with(it).load(country.flag).into(detailFlag)
         }
@@ -48,15 +49,5 @@ class CountryDetailFragment : Fragment(), CountryDetailFragmentView {
         txtDetailPob?.text = country.poblation.toString()
         txtDetailPib?.text = country.PIB.toString()
         txtDetailPibHab?.text = country.PIBPerHab.toString()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putParcelable(COUNTRY, country)
-
-        super.onSaveInstanceState(outState)
-    }
-
-    companion object {
-        private const val COUNTRY = "COUNTRY"
     }
 }

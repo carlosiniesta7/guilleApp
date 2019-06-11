@@ -98,12 +98,8 @@ class MainActivity : AppCompatActivity(), CountryListFragment.Response,
     // ---- CountryListFragment.Response ----
 
     override fun itemPressed(item: Country) {
-        val modelIn = CountryDetailViewModelIn(item)
-
-        val bundle = Bundle()
-        bundle.putParcelable("modelIn", modelIn)
-
-        findNavController(R.id.nav_host_fragment).navigate(R.id.action_showDetail, bundle)
+        val action = CountryListFragmentDirections.actionShowDetail(CountryDetailViewModelIn(item))
+        findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
     // ---- END CountryListFragment.Response ----
