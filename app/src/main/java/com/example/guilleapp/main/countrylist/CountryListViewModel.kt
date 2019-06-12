@@ -8,15 +8,15 @@ import com.example.guilleapp.main.Country
 
 class CountryListViewModel : ViewModel() {
 
-    private var countriesLD: MutableLiveData<ArrayList<Country>> = MutableLiveData()
+    private var countriesLD: MutableLiveData<List<Country>> = MutableLiveData()
 
     init {
         countriesLD.value = addCountries()
     }
 
-    fun getCountriesLD(): LiveData<ArrayList<Country>> = countriesLD
+    fun getCountriesLD(): LiveData<List<Country>> = countriesLD
 
-    private fun addCountries(): ArrayList<Country> =
+    private fun addCountries(): List<Country> =
             ArrayList<Country>().also { countries ->
             countries.add(
                 Country(

@@ -19,7 +19,7 @@ class CountryListFragment : Fragment() {
 
     private var listenerResponse: Response? = null
 
-    private var countries: ArrayList<Country>? = null
+    private var countries: List<Country>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,17 +70,7 @@ class CountryListFragment : Fragment() {
         listenerResponse = null
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putParcelableArrayList(COUNTRIES, countries)
-
-        super.onSaveInstanceState(outState)
-    }
-
-    companion object {
-        private const val COUNTRIES = "COUNTRIES"
-    }
-
-    private fun showCountries(countries: ArrayList<Country>) {
+    private fun showCountries(countries: List<Country>) {
         this.countries = countries
         (my_recycler_view?.adapter as? AdapterCountry?)?.update(countries = countries)
     }
