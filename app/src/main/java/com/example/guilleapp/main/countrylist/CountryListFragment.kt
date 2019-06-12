@@ -4,7 +4,6 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
-import android.os.Parcelable
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -13,16 +12,14 @@ import android.view.ViewGroup
 import com.example.guilleapp.R
 import com.example.guilleapp.main.Country
 import kotlinx.android.synthetic.main.fragment_list.*
-import java.io.Serializable
 
-@Suppress("UNCHECKED_CAST")
 class CountryListFragment : Fragment() {
 
     private lateinit var viewModel: CountryListViewModel
 
     private var listenerResponse: Response? = null
 
-    private var countries: List<Country>? = null
+    private var countries: ArrayList<Country>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,18 +36,12 @@ class CountryListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         configAdapter()
-        if (savedInstanceState == null) {
-            viewModel.getCountriesLD().observe(this, Observer { countries ->
-                if (countries != null) {
-                    showCountries(countries)
-                }
-            })
-        }
-        else {
-            countries = (savedInstanceState.getSerializable(COUNTRIES) as? List<Country>)?.also {
-                showCountries(it)
+
+        viewModel.getCountriesLD().observe(this, Observer { countries ->
+            if (countries != null) {
+                showCountries(countries)
             }
-        }
+        })
     }
 
     private fun configAdapter() {
@@ -80,7 +71,7 @@ class CountryListFragment : Fragment() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putSerializable(COUNTRIES, countries as Serializable)
+        outState.putParcelableArrayList(COUNTRIES, countries)
 
         super.onSaveInstanceState(outState)
     }
@@ -89,7 +80,7 @@ class CountryListFragment : Fragment() {
         private const val COUNTRIES = "COUNTRIES"
     }
 
-    private fun showCountries(countries: List<Country>) {
+    private fun showCountries(countries: ArrayList<Country>) {
         this.countries = countries
         (my_recycler_view?.adapter as? AdapterCountry?)?.update(countries = countries)
     }
