@@ -1,4 +1,4 @@
-package com.example.guilleapp.main.countrylist
+package com.example.guilleapp.view.main.countrylist
 
 
 import android.arch.lifecycle.ViewModel

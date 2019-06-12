@@ -16,12 +16,12 @@
                 android:value="@string/google_maps_key"/>
 
         <activity
-                android:name=".MapsActivity"
+                android:name=".view.MapsActivity"
                 android:label="@string/title_activity_maps">
         </activity>
-        <activity android:name=".second.SecondActivity">
+        <activity android:name="com.example.guilleapp.view.second.SecondActivity">
         </activity>
-        <activity android:name=".main.MainActivity">
+        <activity android:name="com.example.guilleapp.view.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

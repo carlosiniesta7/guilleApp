@@ -1,8 +1,8 @@
-package com.example.guilleapp.main.countrydetail
+package com.example.guilleapp.view.main.countrydetail
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.example.guilleapp.main.Country
+import com.example.guilleapp.view.main.model.Country
 
 data class CountryDetailViewModelIn(val country: Country?) : Parcelable {
     constructor(parcel: Parcel) : this(parcel.readParcelable<Country>(Country::class.java.classLoader))

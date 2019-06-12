@@ -1,11 +1,11 @@
-package com.example.guilleapp.second
+package com.example.guilleapp.view.second
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.guilleapp.R
-import com.example.guilleapp.second.viewpager.SecondVPFragment
-import com.example.guilleapp.second.viewpager.ThirdFragment
-import com.example.guilleapp.second.viewpager.ViewPagerFragment
+import com.example.guilleapp.view.second.viewpager.SecondVPFragment
+import com.example.guilleapp.view.second.viewpager.ThirdFragment
+import com.example.guilleapp.view.second.viewpager.ViewPagerFragment
 
 
 class SecondActivity : AppCompatActivity(), SecondVPFragment.ButtonClick {

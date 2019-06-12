@@ -1,4 +1,4 @@
-package com.example.guilleapp.main
+package com.example.guilleapp.view.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,12 +9,13 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import androidx.navigation.findNavController
-import com.example.guilleapp.MapsActivity
+import com.example.guilleapp.view.MapsActivity
 import com.example.guilleapp.R
-import com.example.guilleapp.main.countrydetail.CountryDetailViewModelIn
-import com.example.guilleapp.main.countrylist.CountryListFragment
-import com.example.guilleapp.main.countrylist.CountryListFragmentDirections
-import com.example.guilleapp.second.SecondActivity
+import com.example.guilleapp.view.main.countrydetail.CountryDetailViewModelIn
+import com.example.guilleapp.view.main.countrylist.CountryListFragment
+import com.example.guilleapp.view.main.countrylist.CountryListFragmentDirections
+import com.example.guilleapp.view.main.model.Country
+import com.example.guilleapp.view.second.SecondActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), CountryListFragment.Response,
@@ -87,7 +88,14 @@ class MainActivity : AppCompatActivity(), CountryListFragment.Response,
 
     private fun goToBestCountry() {
         findNavController(R.id.nav_host_fragment).navigateUp()
-        val fav = CountryDetailViewModelIn(Country("El Escorial", 15842, R.drawable.escorial, 9999))
+        val fav = CountryDetailViewModelIn(
+            Country(
+                "El Escorial",
+                15842,
+                R.drawable.escorial,
+                9999
+            )
+        )
         val action = CountryListFragmentDirections.actionShowDetail(fav)
         findNavController(R.id.nav_host_fragment).navigate(action)
     }

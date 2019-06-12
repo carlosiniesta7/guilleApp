@@ -1,4 +1,4 @@
-package com.example.guilleapp.main.countrydetail
+package com.example.guilleapp.view.main.countrydetail
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.guilleapp.R
-import com.example.guilleapp.main.Country
+import com.example.guilleapp.view.main.model.Country
 import kotlinx.android.synthetic.main.fragment_detail.*
 
 class CountryDetailFragment : Fragment() {

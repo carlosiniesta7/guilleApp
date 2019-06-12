@@ -1,4 +1,4 @@
-package com.example.guilleapp.main.countrylist
+package com.example.guilleapp.view.main.countrylist
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.guilleapp.R
-import com.example.guilleapp.main.Country
+import com.example.guilleapp.view.main.model.Country
 
 class AdapterCountry(private var list: MutableList<Country>) : RecyclerView.Adapter<AdapterCountry.ViewHolder>() {
 

@@ -1,4 +1,4 @@
-package com.example.guilleapp.second.viewpager
+package com.example.guilleapp.view.second.viewpager
 
 import android.content.Context
 import android.os.Bundle

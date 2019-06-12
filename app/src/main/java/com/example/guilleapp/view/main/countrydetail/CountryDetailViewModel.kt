@@ -1,9 +1,9 @@
-package com.example.guilleapp.main.countrydetail
+package com.example.guilleapp.view.main.countrydetail
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.example.guilleapp.main.Country
+import com.example.guilleapp.view.main.model.Country
 
 class CountryDetailViewModel(country: Country?) : ViewModel() {
 

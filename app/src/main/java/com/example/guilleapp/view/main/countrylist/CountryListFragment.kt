@@ -1,4 +1,4 @@
-package com.example.guilleapp.main.countrylist
+package com.example.guilleapp.view.main.countrylist
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -10,7 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.guilleapp.R
-import com.example.guilleapp.main.Country
+import com.example.guilleapp.view.main.model.Country
 import kotlinx.android.synthetic.main.fragment_list.*
 
 class CountryListFragment : Fragment() {
