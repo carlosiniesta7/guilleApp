@@ -10,3 +10,12 @@ fun CountryData.toDomain() : CountryDomain {
         PIBPerHab = this.PIBPerHab
     )
 }
+
+fun CountryDomain.toData() : CountryData {
+    return CountryData(
+        name = this.name,
+        poblation = this.poblation,
+        PIB = this.PIB,
+        PIBPerHab = this.PIBPerHab
+    )
+}

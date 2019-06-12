@@ -1,7 +1,8 @@
 package com.example.guilleapp.data
 
 class FakeCountryDataSource : CountryDataSource {
-    override fun getCountries() : List<CountryData> = ArrayList<CountryData>().also { countries ->
+
+    override fun getCountries(): List<CountryData> = ArrayList<CountryData>().also { countries ->
         countries.add(
             CountryData(
                 "Italia",
