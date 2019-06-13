@@ -2,6 +2,16 @@ package com.example.guilleapp.data
 
 class FakeCountryDataSource : CountryDataSource {
 
+    override fun deleteCountry(country: CountryData): List<CountryData> = ArrayList<CountryData>().also { countries ->
+        countries.remove(
+            CountryData(
+                country.name,
+                country.poblation,
+                country.PIB
+            )
+        )
+    }
+
     override fun getCountries(): List<CountryData> = ArrayList<CountryData>().also { countries ->
         countries.add(
             CountryData(

@@ -17,22 +17,49 @@ import com.example.guilleapp.view.main.countrylist.CountryListFragmentDirections
 import com.example.guilleapp.view.main.model.Country
 import com.example.guilleapp.view.second.SecondActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import android.annotation.SuppressLint
+import com.example.guilleapp.view.main.countrydetail.CountryDetailFragment
 
-class MainActivity : AppCompatActivity(), CountryListFragment.Response,
+class MainActivity : AppCompatActivity(), CountryListFragment.Response, CountryDetailFragment.ButtonClick,
     NavigationView.OnNavigationItemSelectedListener {
 
+    @SuppressLint("LongLogTag")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         initMenu()
+
         initListeners()
 
         //Request Permissions for Maps
         val permissions = arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION)
         ActivityCompat.requestPermissions(this, permissions, 0)
 
+        //FirebaseApp.initializeApp(this)
+
+    }
+
+    @SuppressLint("LongLogTag")
+    override fun onResume() {
+        super.onResume()
+/*
+        // Access a Cloud Firestore instance from your Activity
+        val db : FirebaseFirestore = FirebaseFirestore.getInstance()
+
+        db.collection("Countries")
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    for (document in task.result!!) {
+                        Log.d("",document.id + " => " + document.data)
+                    }
+                } else {
+                    Log.w("Error getting documents.", task.exception)
+                }
+           }
+*/
     }
 
     private fun initMenu() {
@@ -111,6 +138,14 @@ class MainActivity : AppCompatActivity(), CountryListFragment.Response,
     }
 
     // ---- END CountryListFragment.Response ----
+
+    // ---- CountryDetailFragment.ButtonClick ----
+
+    override fun buttonPressed() {
+        findNavController(R.id.nav_host_fragment).navigateUp()
+    }
+
+    // ---- END CountryDetailFragment.ButtonClick ----
 
 }
 

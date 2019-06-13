@@ -2,11 +2,13 @@ package com.example.guilleapp.view.main.countrydetail
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.guilleapp.R
@@ -18,6 +20,8 @@ class CountryDetailFragment : Fragment() {
     private val args: CountryDetailFragmentArgs by navArgs()
 
     private lateinit var viewModel: CountryDetailViewModel
+
+    private var listenerButtonClick: ButtonClick? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,11 +38,28 @@ class CountryDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        val btn = view.findViewById<Button>(R.id.delete_btn)
+        btn?.setOnClickListener {
+            listenerButtonClick?.buttonPressed()
+        }
+
         viewModel.getCountryLD().observe(this, Observer { country ->
             if (country != null) {
                 showCountry(country)
             }
         })
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+
+        listenerButtonClick = context as? ButtonClick?
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+
+        listenerButtonClick = null
     }
 
     private fun showCountry(country: Country) {
@@ -50,4 +71,12 @@ class CountryDetailFragment : Fragment() {
         txtDetailPib?.text = country.PIB.toString()
         txtDetailPibHab?.text = country.PIBPerHab.toString()
     }
+
+    // ---- Interface ----
+
+    interface ButtonClick {
+        fun buttonPressed()
+    }
+
+    // ---- END Interface ----
 }
