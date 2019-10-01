@@ -1,5 +1,6 @@
 package com.example.guilleapp.main
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -22,16 +23,18 @@ class MainActivity : AppCompatActivity(), CountryListFragment.Response,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
         initMenu()
         initListeners()
+        requestLocation()
+    }
 
-        //Request Permissions for Maps
-        val permissions = arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION)
+    //------ Start Funcions -----
+    private fun requestLocation() {
+        val permissions = arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION)
         ActivityCompat.requestPermissions(this, permissions, 0)
-
     }
 
     private fun initMenu() {
@@ -49,16 +52,9 @@ class MainActivity : AppCompatActivity(), CountryListFragment.Response,
         nav_view.setNavigationItemSelectedListener(this)
     }
 
-    override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
-    }
+    // END ------ Start Funcions -----
 
     // ---- NavigationView.OnNavigationItemSelectedListener ----
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
@@ -70,7 +66,6 @@ class MainActivity : AppCompatActivity(), CountryListFragment.Response,
             }
             R.id.nav_map -> {
                 val intentMap = Intent(this, MapsActivity::class.java)
-
                 startActivity(intentMap)
             }
             R.id.nav_about -> {
@@ -91,12 +86,10 @@ class MainActivity : AppCompatActivity(), CountryListFragment.Response,
         val action = CountryListFragmentDirections.actionShowDetail(fav)
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
-
     // ---- END NavigationView.OnNavigationItemSelectedListener ----
 
 
     // ---- CountryListFragment.Response ----
-
     override fun itemPressed(item: Country) {
         val modelIn = CountryDetailViewModelIn(item)
 
@@ -105,8 +98,15 @@ class MainActivity : AppCompatActivity(), CountryListFragment.Response,
 
         findNavController(R.id.nav_host_fragment).navigate(R.id.action_showDetail, bundle)
     }
-
     // ---- END CountryListFragment.Response ----
+
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
 
 }
 
